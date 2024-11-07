@@ -16,5 +16,6 @@ public class WebTableTest {
                 .stream()
                 .forEach(webElement -> System.out.println(webElement.getText()));
 //Test pull code 01
+        //Test pull code 02
     }
 }
