@@ -15,5 +15,6 @@ public class WebTableTest {
                 .findElements(By.xpath("//table[@id='table1']/tbody/tr/td[4]"))
                 .stream()
                 .forEach(webElement -> System.out.println(webElement.getText()));
+        //remove all txt
     }
 }
