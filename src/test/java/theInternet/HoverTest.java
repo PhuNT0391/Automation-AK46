@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.*;
 
-public class HoverTest {
+public class  HoverTest {
 
     @Test
     void ableToHoverImage1() {
