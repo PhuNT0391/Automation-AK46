@@ -8,30 +8,28 @@ import org.testng.annotations.*;
 
 public class JSAlertTest {
     WebDriver driver;
+
     @BeforeClass
     void setUp(){
         driver = new ChromeDriver();
         driver.get("https://the-internet.herokuapp.com/javascript_alerts");
     }
-
     @Test
     void clickJsAlertSuccessfully(){
-
-
         driver.findElement(By.xpath("//button[.='Click for JS Alert']")).click();
         driver.switchTo().alert().accept();
 
         Assert.assertEquals(driver.findElement(By.id("result")).getText(),"You successfully clicked an alert");
     }
     @Test
-    void verifyClickOkinJsAlertConfirmSuccessfully(){
+    void verifyClickOkInJsAlertConfirmSuccessfully(){
         driver.findElement(By.xpath("//button[.='Click for JS Confirm']")).click();
         driver.switchTo().alert().accept();
 
         Assert.assertEquals(driver.findElement(By.id("result")).getText(),"You clicked: Ok");
     }
     @Test
-    void verifyClickCancelinJsAlertConfirmSuccessfully(){
+    void verifyClickCancelInJsAlertConfirmSuccessfully(){
         driver.findElement(By.xpath("//button[.='Click for JS Confirm']")).click();
         driver.switchTo().alert().dismiss();
 
