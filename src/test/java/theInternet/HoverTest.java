@@ -12,6 +12,8 @@ public class HoverTest {
     @Test
     void ableToHoverImage1() {
         WebDriver driver = new ChromeDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments(("--headless=new"));
 
         driver.get("https://the-internet.herokuapp.com/hovers");
 
