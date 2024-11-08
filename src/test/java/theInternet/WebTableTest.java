@@ -16,5 +16,6 @@ public class WebTableTest {
                 .stream()
                 .forEach(webElement -> System.out.println(webElement.getText()));
         //remove all txt
+        //add new txt 001
     }
 }
