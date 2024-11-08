@@ -11,16 +11,17 @@ import org.testng.annotations.*;
 
 public class CheckboxesTest {
     WebDriver driver;
+
     @BeforeMethod
     void setUp(){
-        driver = new ChromeDriver();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");
-        driver.get("https://the-internet.herokuapp.com/checkboxes");
+        driver = new ChromeDriver(chromeOptions);
     }
 
     @Test
     void ableToSelectACheckbox() {
+        driver.get("https://the-internet.herokuapp.com/checkboxes");
         WebElement checkbox = driver.findElement(By.xpath("//form[@id]//input[1]"));
         if (!checkbox.isSelected()) {
             checkbox.click();
@@ -30,6 +31,7 @@ public class CheckboxesTest {
 
     @Test
     void ableToUnSelectACheckbox() {
+        driver.get("https://the-internet.herokuapp.com/checkboxes");
         WebElement checkbox = driver.findElement(By.xpath("//form[@id]//input[2]"));
         if (checkbox.isSelected()) {
             checkbox.click();
