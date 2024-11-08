@@ -17,7 +17,6 @@ public class CheckboxesTest {
     @Test
     void ableToSelectACheckbox() {
         WebDriver driver = new ChromeDriver();
-
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");
 
