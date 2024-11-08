@@ -1,7 +1,8 @@
 <suite name="WebTable">
     <test name="Chrome Browser">
         <classes>
-            <class name="theInternet.HyperLinkTest"/>
+            <class name="theInternet.HoverTest"/>
+            <class name ="theInternet.HyperLinkTest"/>
         </classes>
     </test>
 </suite>
