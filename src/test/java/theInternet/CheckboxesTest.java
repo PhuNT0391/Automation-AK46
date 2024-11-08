@@ -15,7 +15,7 @@ public class CheckboxesTest {
     @BeforeMethod
     void setUp(){
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--headless=new");
         driver = new ChromeDriver(chromeOptions);
     }
 

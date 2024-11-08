@@ -12,15 +12,14 @@ public class HoverTest {
 
     @BeforeMethod
     void setUp() {
-        driver = new ChromeDriver();
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments(("--headless=new"));
-
-        driver.get("https://the-internet.herokuapp.com/hovers");
+        chromeOptions.addArguments("--headless=new");
+        driver = new ChromeDriver(chromeOptions);
     }
 
     @Test
     void ableToHoverImage1() {
+        driver.get("https://the-internet.herokuapp.com/hovers");
         Actions actions = new Actions(driver);
         actions
                 .moveToElement(driver.findElements(By.cssSelector("#content .figure"))
