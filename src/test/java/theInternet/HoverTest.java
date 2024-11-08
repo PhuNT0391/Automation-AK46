@@ -14,6 +14,7 @@ public class HoverTest {
     void setUp() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless=new");
+
         driver = new ChromeDriver(chromeOptions);
     }
 
@@ -21,9 +22,7 @@ public class HoverTest {
     void ableToHoverImage1() {
         driver.get("https://the-internet.herokuapp.com/hovers");
         Actions actions = new Actions(driver);
-        actions
-                .moveToElement(driver.findElements(By.cssSelector("#content .figure"))
-                        .get(0)).perform();
+        actions.moveToElement(driver.findElements(By.cssSelector("#content .figure")).get(0)).perform();
     }
 
     @AfterMethod

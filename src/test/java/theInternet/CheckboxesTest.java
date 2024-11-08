@@ -13,7 +13,7 @@ public class CheckboxesTest {
     WebDriver driver;
 
     @BeforeMethod
-    void setUp(){
+    void setUp() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless=new");
         driver = new ChromeDriver(chromeOptions);
@@ -38,8 +38,10 @@ public class CheckboxesTest {
         }
         Assert.assertFalse(checkbox.isSelected());
     }
+
     @AfterMethod
-    void tearDown(){
+    void tearDown() {
         driver.quit();
+
     }
 }

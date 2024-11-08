@@ -4,14 +4,25 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class DropDownTest {
+    WebDriver driver;
+
+    @BeforeMethod
+    void setUp(){
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless=new");
+
+        driver = new ChromeDriver(chromeOptions);
+    }
     @Test
     void ableSelectAnOption() {
-        WebDriver driver = new ChromeDriver();
         driver.get("https://the-internet.herokuapp.com/dropdown");
 
         Select select = new Select(driver.findElement(By.id("dropdown")));
@@ -23,7 +34,6 @@ public class DropDownTest {
 
     @Test
     void ableSelectMultipleOptions() {
-        WebDriver driver = new ChromeDriver();
         driver.get("https://output.jsbin.com/osebed/2");
         Select select = new Select(driver.findElement(By.id("fruits")));
 
@@ -46,12 +56,8 @@ public class DropDownTest {
         Assert.assertFalse(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='orange']")).isSelected());
         Assert.assertFalse(driver.findElement(By.xpath("//*[@id='fruits']/option[@value='grape']")).isSelected());
     }
-
-    @Test
-    void ableSelectDateForFlight() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.vietnamairlines.com/vn/en/home");
-
-
+    @AfterMethod
+    void tearDown(){
+        driver.quit();
     }
 }
