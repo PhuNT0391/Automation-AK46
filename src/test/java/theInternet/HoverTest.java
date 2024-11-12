@@ -1,5 +1,6 @@
 package theInternet;
 
+import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,59 +13,34 @@ public class HoverTest {
     WebDriver driver;
 
     @BeforeMethod
-    void setUp() {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless=new");
-
-        driver = new ChromeDriver(chromeOptions);
+    void setUp(){
+        driver = new ChromeDriver();
         driver.get("https://the-internet.herokuapp.com/hovers");
     }
 
-    @Test
-    void ableToHoverImage1() {
+    @DataProvider
+    Object[][] testData() {
+        return new Object[][]{
+                {0, "name: user1"},
+                {1, "name: user2"},
+                {2, "name: user3"}
+        };
+    }
+
+    @Test(dataProvider = "testData")
+    void ableToHoverImage(int imageIndex, String expectedImageName) {
 
         Actions actions = new Actions(driver);
 
         actions
                 .moveToElement(driver.findElements(By.cssSelector("#content .figure"))
-                        .get(0))
+                        .get(imageIndex))
                 .perform();
+        String imageName = driver.findElements(By.cssSelector(".figcaption h5")).get(imageIndex).getText();
+        Assert.assertEquals(imageName, expectedImageName);
     }
-    @Test
-    void ableToHoverImage2(){
-
-        Actions actions = new Actions(driver);
-
-        actions
-                .moveToElement(
-                        driver
-                                .findElements(By.cssSelector("#content .figure"))
-                                .get(1))
-                .perform();
-
-        String imageName = driver.findElements(By.cssSelector(".figcaption h5")).get(1).getText();
-        Assert.assertEquals(imageName,"name: user2");
-    }
-
-    @Test
-    void ableToHoverImage3(){
-
-        Actions actions = new Actions(driver);
-
-        actions
-                .moveToElement(
-                        driver
-                                .findElements(By.cssSelector("#content .figure"))
-                                .get(2))
-                .perform();
-
-        String imageName = driver.findElements(By.cssSelector(".figcaption h5")).get(2).getText();
-        Assert.assertEquals(imageName,"name: user3");
-    }
-
     @AfterMethod
-    void tearDown() {
+    void tearDown(){
         driver.quit();
     }
-
 }
