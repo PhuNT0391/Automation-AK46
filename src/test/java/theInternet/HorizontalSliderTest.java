@@ -13,7 +13,7 @@ public class HorizontalSliderTest {
         WebDriver driver = new ChromeDriver();
         driver.get("https://the-internet.herokuapp.com/horizontal_slider");
         Actions actions = new Actions(driver);
-        WebElement pointer = driver.findElement(By.cssSelector());
+//        WebElement pointer = driver.findElement(By.cssSelector());
 
     }
 

@@ -12,9 +12,10 @@ public class DragDropTest {
 
     @Test
     void successfullyDragAtoB() {
-        WebDriver driver = new ChromeDriver();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless=new");
+
+        WebDriver driver = new ChromeDriver(chromeOptions);
 
         driver.get("https://the-internet.herokuapp.com/drag_and_drop");
 
