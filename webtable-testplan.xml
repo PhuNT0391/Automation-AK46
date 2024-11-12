@@ -3,6 +3,7 @@
         <classes>
             <class name ="theInternet.CheckboxesTest"/>
             <class name = "theInternet.HoverTest"/>
+            <class name = "theInternet.DragDropTest"/>
         </classes>
     </test>
 </suite>
