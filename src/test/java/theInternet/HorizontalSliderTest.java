@@ -16,6 +16,5 @@ public class HorizontalSliderTest {
 //        WebElement pointer = driver.findElement(By.cssSelector());
 
     }
-
 }
 
