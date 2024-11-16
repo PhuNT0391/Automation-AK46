@@ -31,4 +31,9 @@ public class FormAuthenticationPage {
     public boolean isLoggedIn() {
         return driver.findElement(successFlashMessage).getText().contains("You logged into a secure area!");
     }
+
+//    driver.findElement(By.className("error")).getText().contains("Your password is invalid!");
+    public boolean verifyMessageContent(String type,String message){
+        return driver.findElement(By.className(type)).getText().contains(message);
+    }
 }

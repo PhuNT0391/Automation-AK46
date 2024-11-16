@@ -1,5 +1,6 @@
 package support;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -63,5 +64,8 @@ public class Browser {
     }
     public static String getCurrentUrl(){
         return driver.getCurrentUrl();
+    }
+    public static void click (By locator){
+        driver.findElement(locator).click();
     }
 }

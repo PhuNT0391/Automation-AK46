@@ -1,64 +1,41 @@
 package theInternet;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import support.Browser;
 import theInternet.pages.FormAuthenticationPage;
 
 public class FromAuthenticationTest {
-    @BeforeClass
+    @BeforeMethod
     void setUp() {
         Browser.openBrowser("chrome");
     }
 
-    @Test
-    void shouldBeSuccessfullyWithValidCredentials() {
-        FormAuthenticationPage formAuthenticationPage = new FormAuthenticationPage();
-        formAuthenticationPage.open();
-        formAuthenticationPage.login("tomsmith", "SuperSecretPassword!");
+    @DataProvider
+    Object[][] testData(){
+        return new Object[][]{
+                {"tomsmith", "SuperSecretPassword!","https://the-internet.herokuapp.com/secure","success","You logged into a secure area!"},
+                {"tomsmi1h", "SuperSecretPassword!","https://the-internet.herokuapp.com/login","error","Your username is invalid!"},
+                {"tomsmith", "SuperSecretPassword","https://the-internet.herokuapp.com/login","error","Your password is invalid!"},
 
-        Assert.assertEquals(Browser.getCurrentUrl(), "https://the-internet.herokuapp.com/secure");
-        Assert.assertTrue(formAuthenticationPage.isLoggedIn());
+        };
     }
 
-    @AfterClass
+    @Test(dataProvider = "testData")
+    void verifyLoginFunction(String username,String password,String expectedUrl, String expectedMessageType, String expectedMessageContent) {
+        FormAuthenticationPage formAuthenticationPage = new FormAuthenticationPage();
+        formAuthenticationPage.open();
+        formAuthenticationPage.login(username,password);
+
+        Assert.assertEquals(Browser.getCurrentUrl(), expectedUrl);
+        Assert.assertTrue(formAuthenticationPage.verifyMessageContent(expectedMessageType,expectedMessageContent));
+    }
+
+    @AfterMethod
     void tearDown() {
         Browser.quit();
     }
-//
-//    @Test
-//    void shouldBeFailedWithInvalidUsername() {
-//        FormAuthenticationPage formAuthenticationPage = new FormAuthenticationPage();
-//        formAuthenticationPage.open();
-//        formAuthenticationPage.login("tomsmith123", "SuperSecretPassword!");
-//
-//        Assert.assertTrue(driver.findElement(By.className("error")).getText().contains("Your username is invalid!"));
-//    }
-//
-//    @Test
-//    void shouldBeFailedWithInvalidPassword() {
-//        driver.get("https://the-internet.herokuapp.com/login");
-//
-//        driver.findElement(By.id("username")).sendKeys("tomsmith");
-//        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!123");
-//        driver.findElement(By.cssSelector("button[type=submit]")).click();
-//
-//        Assert.assertTrue(driver.findElement(By.className("error")).getText().contains("Your password is invalid!"));
-//    }
-//
-//    @Test
-//    void backLoginPage() {
-//        driver.get("https://the-internet.herokuapp.com/login");
-//
-//        driver.findElement(By.id("username")).sendKeys("tomsmith");
-//        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
-//        driver.findElement(By.cssSelector("button[type=submit]")).click();
-//
-//        driver.findElement(By.cssSelector("a[class='button secondary radius']")).click();
-//        Assert.assertTrue(driver.findElement(By.className("success")).getText().contains("You logged out of the secure area!"));
-//    }
 }
