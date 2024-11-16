@@ -6,26 +6,28 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import support.Browser;
+import theInternet.pages.FormAuthenticationPage;
 
 public class FromAuthenticationTest {
-    WebDriver driver;
-
-    @BeforeMethod
-    void setup() {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless=new");
-        driver = new ChromeDriver(chromeOptions);
+    @BeforeClass
+    void setUp() {
+        Browser.openBrowser("chrome");
     }
 
     @Test
     void shouldBeSuccessfullyWithValidCredentials() {
-        driver.get("https://the-internet.herokuapp.com/login");
+        FormAuthenticationPage formAuthenticationPage = new FormAuthenticationPage();
+        formAuthenticationPage.open();
+        formAuthenticationPage.login("tomsmith", "SuperSecretPassword!");
 
-        driver.findElement(By.id("username")).sendKeys("tomsmith");
-        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
-        driver.findElement(By.cssSelector("button[type=submit]")).click();
+        Assert.assertEquals(Browser.getCurrentUrl(), "https://the-internet.herokuapp.com/secure");
+        Assert.assertTrue(formAuthenticationPage.isLoggedIn());
+    }
 
-        Assert.assertTrue(driver.findElement(By.className("success")).getText().contains("You logged into a secure area!"));
+    @AfterClass
+    void tearDown() {
+        Browser.quit();
     }
 
     @Test
@@ -60,10 +62,5 @@ public class FromAuthenticationTest {
 
         driver.findElement(By.cssSelector("a[class='button secondary radius']")).click();
         Assert.assertTrue(driver.findElement(By.className("success")).getText().contains("You logged out of the secure area!"));
-    }
-
-    @AfterMethod
-    void tearDown() {
-        driver.quit();
     }
 }

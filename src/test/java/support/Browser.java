@@ -58,4 +58,10 @@ public class Browser {
         }
     }
 
+    public static WebDriver getDriver() {
+        return driver;
+    }
+    public static String getCurrentUrl(){
+        return driver.getCurrentUrl();
+    }
 }
