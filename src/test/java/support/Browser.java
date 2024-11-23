@@ -10,7 +10,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -20,27 +19,27 @@ public class Browser {
     public static WebDriverWait wait;
     public static Actions actions;
 
-    public static void openBrowser(String browserName){
-        switch (browserName.toLowerCase()){
-            case "chrome":{
+    public static void openBrowser(String browserName) {
+        switch (browserName.toLowerCase()) {
+            case "chrome": {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--headless=new");
                 driver = new ChromeDriver(chromeOptions);
                 break;
             }
-            case "firefox":{
+            case "firefox": {
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 firefoxOptions.addArguments("--headless=new");
                 driver = new FirefoxDriver(firefoxOptions);
                 break;
             }
-            case "edge":{
+            case "edge": {
                 EdgeOptions edgeOptions = new EdgeOptions();
                 edgeOptions.addArguments("--headless=new");
                 driver = new EdgeDriver(edgeOptions);
                 break;
             }
-            case "safari":{
+            case "safari": {
                 driver = new SafariDriver();
                 break;
             }
@@ -50,11 +49,13 @@ public class Browser {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
     }
-    public static void visit(String url){
+
+    public static void visit(String url) {
         driver.get(url);
     }
-    public static void quit(){
-        if (driver != null){
+
+    public static void quit() {
+        if (driver != null) {
             driver.quit();
         }
     }
@@ -62,10 +63,12 @@ public class Browser {
     public static WebDriver getDriver() {
         return driver;
     }
-    public static String getCurrentUrl(){
+
+    public static String getCurrentUrl() {
         return driver.getCurrentUrl();
     }
-    public static void click (By locator){
+
+    public static void click(By locator) {
         driver.findElement(locator).click();
     }
 }
