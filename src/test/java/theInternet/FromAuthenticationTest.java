@@ -20,12 +20,11 @@ public class FromAuthenticationTest {
                 {"tomsmith", "SuperSecretPassword!","https://the-internet.herokuapp.com/secure","success","You logged into a secure area!"},
                 {"tomsmi1h", "SuperSecretPassword!","https://the-internet.herokuapp.com/login","error","Your username is invalid!"},
                 {"tomsmith", "SuperSecretPassword","https://the-internet.herokuapp.com/login","error","Your password is invalid!"},
-
         };
     }
 
     @Test(dataProvider = "testData")
-    void verifyLoginFunction(String username,String password,String expectedUrl, String expectedMessageType, String expectedMessageContent) {
+    void verifyLoginFunction(String username, String password, String expectedUrl, String expectedMessageType, String expectedMessageContent) {
         FormAuthenticationPage formAuthenticationPage = new FormAuthenticationPage();
         formAuthenticationPage.open();
         formAuthenticationPage.login(username,password);

@@ -16,7 +16,7 @@ public class HyperLinkTest {
     @Test
     void tc04() {
         HyperLinkPage hyperLinkPage = new HyperLinkPage();
-        hyperLinkPage.open();;
+        hyperLinkPage.open();
 
         hyperLinkPage.clickHyperLink("200");
         Assert.assertTrue(hyperLinkPage.isPageUrlContain("200"));
