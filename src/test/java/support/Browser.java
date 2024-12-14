@@ -1,6 +1,9 @@
 package support;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,7 +14,10 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
 public class Browser {
@@ -70,5 +76,19 @@ public class Browser {
 
     public static void click(By locator) {
         driver.findElement(locator).click();
+    }
+
+    public  static void captureScreenShot(String fileName) {
+            TakesScreenshot scrShot = ((TakesScreenshot) driver);
+            File srcFile = scrShot.getScreenshotAs(OutputType.FILE);
+            File destFile = new File(String.format("target/%s-%d.png", fileName, System.currentTimeMillis()));
+        try {
+            FileUtils.copyFile(srcFile, destFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void fill(By locator, String withText) {
+
     }
 }

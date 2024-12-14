@@ -13,6 +13,7 @@ public class HyperLinkPage {
     }
 
     public boolean isPageUrlContain(String hyperLink) {
-        return Browser.getCurrentUrl().contains(String.format("https://the-internet.herokuapp.com/status_codes/%s", hyperLink));
+        return Browser.getCurrentUrl()
+                .contains(String.format("https://the-internet.herokuapp.com/status_codes/%s", hyperLink));
     }
 }
